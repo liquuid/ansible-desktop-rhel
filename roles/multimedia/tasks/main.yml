@@ -22,4 +22,6 @@
       - gstreamer1-plugins-ugly
       - gstreamer1-vaapi
       - PackageKit-gstreamer-plugin
+      - steam
+      - dolphin-emu
     state: latest

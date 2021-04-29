@@ -22,6 +22,12 @@
       - fira-code-fonts
     state: installed
 
+- name: Add flathub
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
 - name: Install "Snap"
   dnf: name=snapd state=latest 
 
@@ -36,36 +42,46 @@
     state: link
 
 
-- name: Install "phpstorm" with option --classic
-  snap:
-    name: phpstorm
-    classic: yes
+- name: Install "phpstorm" 
+  flatpak:
+    name: com.jetbrains.PhpStorm
+    state: present
 
-- name: Install "goland" with option --classic
-  snap:
-    name: goland
-    classic: yes
+- name: Install "goland" 
+  flatpak:
+    name: com.jetbrains.Goland
+    state: present
 
+- name: Install "clion"                      
+  flatpak:
+    name: com.jetbrains.Clion
+    state: present 
 
-- name: Install "clion" with option --classic
-  snap:
-    name: clion
-    classic: yes
+- name: Install "Pycharm-Professional"                      
+  flatpak:
+    name: com.jetbrains.Pycharm-Professional
+    state: present
 
-- name: Install "webstorm" with option --classic
-  snap:
-    name: webstorm
-    classic: yes
+- name: Install "WebStorm"                      
+  flatpak:
+    name: com.jetbrains.WebStorm
+    state: present
 
-- name: Install "pycharm-professional" with option --classic
-  snap:
-    name: pycharm-professional
-    classic: yes
+- name: Install "DBeaver"
+  flatpak:
+    name: io.dbeaver.DBeaverCommunity 
+    state: present
+
+- name: Install "Android Studio"
+  flatpak:
+    name: com.google.AndroidStudio
+    state: present
+
 
 - name: remove "insomnia" 
   snap:
     name: insomnia
-    state: absent
+    state: present
 
 - name: Install "postbird" 
   snap:
