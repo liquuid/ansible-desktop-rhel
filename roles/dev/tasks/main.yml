@@ -20,6 +20,8 @@
       - glib2-devel
       - libtool
       - fira-code-fonts
+      - cargo
+      - java-1.8.0-openjdk-devel 
     state: installed
 
 - name: Add flathub
@@ -83,9 +85,9 @@
     name: insomnia
     state: present
 
-- name: Install "postbird" 
+- name: Install "DBeaver CE" 
   snap:
-    name: postbird        
+    name: dbeaver-ce        
 
 - name: Add MS keys
   rpm_key:
@@ -105,7 +107,6 @@
 - name: Install "codeblocks"
   dnf:
     name: codeblocks
-
 
 - name: Install "anjuta"
   dnf:
