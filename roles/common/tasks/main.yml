@@ -72,7 +72,12 @@
       - libreoffice-langpack-pt-BR
       - compsize
       - foliate
-
+      - yakuake
+      - fortune-mod
+      - zsh
+      - ffmpegthumbnailer
+      - ffmpegthumbs
+      
     state: installed
 
 - name: Install webp thumbnailer
