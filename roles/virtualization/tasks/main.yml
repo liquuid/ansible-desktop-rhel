@@ -7,10 +7,10 @@
       - python-VirtualBox
       - vagrant
       - libvirt-daemon-vbox
-      - docker-vim
-      - docker-selinux
-      - docker
-      - docker-compose
+      #- docker-vim
+      #- docker-selinux
+      #- docker
+      #- docker-compose
       - podman
       - binutils
       - gcc
@@ -26,9 +26,9 @@
       - dkms
     state: latest
 
-- name: Enable docker
-  service:
-    name: docker
-    state: started
-    enabled: yes
+      #- name: Enable docker
+      #  service:
+      #    name: docker
+      #    state: started
+      #    enabled: yes
 
