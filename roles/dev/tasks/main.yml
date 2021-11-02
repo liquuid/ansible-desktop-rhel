@@ -54,11 +54,6 @@
     name: com.jetbrains.Goland
     state: present
 
-- name: Install "clion"                      
-  flatpak:
-    name: com.jetbrains.Clion
-    state: present 
-
 - name: Install "Pycharm-Professional"                      
   flatpak:
     name: com.jetbrains.Pycharm-Professional
@@ -74,13 +69,7 @@
     name: io.dbeaver.DBeaverCommunity 
     state: present
 
-- name: Install "Android Studio"
-  flatpak:
-    name: com.google.AndroidStudio
-    state: present
-
-
-- name: remove "insomnia" 
+- name: Install "insomnia" 
   snap:
     name: insomnia
     state: present
@@ -94,7 +83,7 @@
     state: present
     key: https://packages.microsoft.com/keys/microsoft.asc
 
-- name: Add repository
+- name: Add VSCode repository
   yum_repository:
     name: vscode
     description: vscode repo
@@ -103,18 +92,6 @@
 
 - name: VSCode
   dnf: pkg=code state=latest
-
-- name: Install "codeblocks"
-  dnf:
-    name: codeblocks
-
-- name: Install "anjuta"
-  dnf:
-    name: anjuta
-
-- name: Install "arduino"
-  dnf:
-    name: arduino
 
 - name: Install "micro"
   dnf:

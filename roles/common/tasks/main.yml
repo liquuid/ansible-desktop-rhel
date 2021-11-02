@@ -49,7 +49,6 @@
       - util-linux-user
       - qt5ct
       - yaru-theme
-      - ubuntu-title-fonts
       #- gnome-shell-extension-netspeed
       #- gnome-shell-theme-selene
       #- chrome-gnome-shell
