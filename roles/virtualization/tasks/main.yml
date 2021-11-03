@@ -9,7 +9,7 @@
       #- docker-vim
       #- docker-selinux
       #- docker
-      #- docker-compose
+      - docker-compose
       - podman
       - binutils
       - gcc

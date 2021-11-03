@@ -44,6 +44,7 @@
       - p7zip
       - mc
       - nnn
+      - syncthing
       - sshfs
       - gnome-tweak-tool
       - util-linux-user
