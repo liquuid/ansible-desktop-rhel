@@ -43,31 +43,62 @@
     owner: root
     state: link
 
-
-- name: Install "phpstorm" 
+- name: Uninstall "phpstorm" 
   flatpak:
     name: com.jetbrains.PhpStorm
-    state: present
+    state: absent
 
-- name: Install "goland" 
+- name: Uninstall "goland" 
   flatpak:
     name: com.jetbrains.Goland
-    state: present
+    state: absent
 
-- name: Install "Pycharm-Professional"                      
+- name: Uninstall "Pycharm-Professional"                      
   flatpak:
     name: com.jetbrains.Pycharm-Professional
-    state: present
+    state: absent
 
-- name: Install "WebStorm"                      
+- name: Uninstall "WebStorm"                      
   flatpak:
     name: com.jetbrains.WebStorm
-    state: present
+    state: absent
 
-- name: Install "DBeaver"
+- name: Uninstall "DBeaver"
   flatpak:
     name: io.dbeaver.DBeaverCommunity 
+    state: absent
+
+- name: Install "phpstorm" 
+  snap:
+    name: phpstorm
     state: present
+    classic: yes
+
+- name: Install "goland" 
+  snap:
+    name: goland
+    state: present
+    classic: yes
+
+- name: Install "Pycharm-Professional"                      
+  snap:
+    name: pycharm-professional
+    state: present
+    classic: yes
+
+- name: Install "WebStorm"                      
+  snap:
+    name: webstorm
+    state: present
+    classic: yes
+
+- name: Install "DBeaver"
+  snap:
+    name: dbeaver-ce 
+    state: present
+    classic: yes
+
+
 
 - name: Install "insomnia" 
   snap:
