@@ -8,7 +8,8 @@
 - name: Install RPMfusion nonfree
   dnf: name=https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-branched.noarch.rpm state=latest disable_gpg_check=yes
 
-
+- name: Team Viewer
+  dnf: name=https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm disable_gpg_check=yes
 
 - name: Package | Install lists packages
   dnf:

@@ -24,4 +24,5 @@
       - PackageKit-gstreamer-plugin
       - steam
       - dolphin-emu
+      - strawberry
     state: latest
