@@ -1,15 +1,20 @@
 ---
+- name: Install YUM Utils
+  shell: yum install -y yum-utils
+
+- name: Install vagrant repo
+  shell: yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo 
 
 - name: Virtualization | Install lists packages
   dnf:
     name:
-      - VirtualBox
+      #- VirtualBox
       - vagrant
-      - libvirt-daemon-vbox
+      #- libvirt-daemon-vbox
       #- docker-vim
       #- docker-selinux
       #- docker
-      - docker-compose
+      - podman-compose
       - podman
       - binutils
       - gcc

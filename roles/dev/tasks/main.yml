@@ -1,4 +1,9 @@
 ---
+- name: Install Dev tools
+  dnf:
+    name: '@Development tools'
+    state: present
+    
 - name: Install X11 libs
   dnf:
     name:
@@ -9,17 +14,17 @@
       - libXi-devel
       - mesa-libGL-devel
       - gcc-c++
-      - SDL2_gfx-devel
-      - SDL2_image-devel
-      - SDL2_mixer-devel
-      - SDL2_ttf-devel
+      #- SDL2_gfx-devel
+      #- SDL2_image-devel
+      #- SDL2_mixer-devel
+      #- SDL2_ttf-devel
       - SDL2-devel
-      - libXxf86vm-devel
+      #- libXxf86vm-devel
       - intltool
-      - glib-devel
+      #- glib-devel
       - glib2-devel
       - libtool
-      - fira-code-fonts
+      #- fira-code-fonts
       - cargo
       - java-1.8.0-openjdk-devel 
     state: installed
@@ -124,11 +129,11 @@
 - name: VSCode
   dnf: pkg=code state=latest
 
-- name: Install "micro"
-  dnf:
-    name: micro
+#- name: Install "micro"
+#  dnf:
+#    name: micro
 
-- name: Install "zeal"
-  dnf:
-    name: zeal
+#- name: Install "zeal"
+#  dnf:
+#    name: zeal
 

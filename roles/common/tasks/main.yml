@@ -2,14 +2,34 @@
 - name: Setup SSHD
   service: name=sshd state=started enabled=yes
 
+#- name: Setup dependencies
+#  dnf:
+#    name:
+#      - python3-dnf
+
+- name: Install EPEL
+  dnf: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm state=latest disable_gpg_check=yes
+
 - name: Install RPMfusion free
-  dnf: name=https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-branched.noarch.rpm state=latest disable_gpg_check=yes
+  dnf: name=https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm state=latest disable_gpg_check=yes
 
 - name: Install RPMfusion nonfree
-  dnf: name=https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-branched.noarch.rpm state=latest disable_gpg_check=yes
+  dnf: name=https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm state=latest disable_gpg_check=yes
 
-- name: Team Viewer
-  dnf: name=https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm disable_gpg_check=yes
+#- name: Team Viewer
+#  dnf: name=https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm disable_gpg_check=yes
+
+- name: Install Gnome
+  dnf:
+    name: '@GNOME Desktop Environment'
+    state: present
+
+- name: Install Workstation
+  dnf:
+    name: '@Workstation'
+    state: present
+
+
 
 - name: Package | Install lists packages
   dnf:
@@ -40,7 +60,7 @@
       - nmap
       - youtube-dl
       - squashfs-tools
-      - shntool
+      #- shntool
       - unrar
       - p7zip
       - mc
@@ -50,7 +70,7 @@
       - gnome-tweak-tool
       - util-linux-user
       - qt5ct
-      - yaru-theme
+      #- yaru-theme
       #- gnome-shell-extension-netspeed
       #- gnome-shell-theme-selene
       #- chrome-gnome-shell
@@ -65,21 +85,27 @@
       #- gnome-shell-extension-system-monitor-applet
       #- gnome-shell-extension-topicons-plus
       #- gnome-shell-theme-yaru
-      - libwebp-tools
-      - pdf2djvu
+      - libwebp
+      #- pdf2djvu
       - poppler-utils
       - ImageMagick
       - xclip
       - libreoffice-langpack-pt-BR
-      - compsize
-      - foliate
+      #- compsize
+      #- foliate
       - yakuake
       - fortune-mod
       - zsh
-      - ffmpegthumbnailer
-      - ffmpegthumbs
+      #- ffmpegthumbnailer
+      #- ffmpegthumbs
       
     state: installed
+
+- name: Enable GDM
+  service:
+    name: gdm
+    enabled: yes
+    state: started
 
 - name: Install webp thumbnailer
   template:
