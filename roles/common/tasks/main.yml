@@ -6,6 +6,22 @@
 #  dnf:
 #    name:
 #      - python3-dnf
+- name: Enable CRB
+  shell: dnf config-manager --set-enabled crb
+  when: ansible_distribution == "Rockylinux"
+
+- name: Enable CRB RHEL
+  shell: subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
+  when: ansible_distribution == "Red Hat Enterprise Linux"  
+
+- name: Install REMI
+  dnf: name=http://mirror.digitalnova.at/remi/enterprise/remi-release-9.rpm state=latest disable_gpg_check=yes
+
+- name: Install ELREPO
+  dnf: name=https://www.elrepo.org/elrepo-release-9.el9.elrepo.noarch.rpm state=latest disable_gpg_check=yes
+
+- name: Install Ghettoforge
+  dnf: name=https://mirror.ghettoforge.org/distributions/gf/gf-release-latest.gf.el9.noarch.rpm state=latest disable_gpg_check=yes
 
 - name: Install EPEL
   dnf: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm state=latest disable_gpg_check=yes
@@ -71,19 +87,19 @@
       - util-linux-user
       - qt5ct
       #- yaru-theme
-      #- gnome-shell-extension-netspeed
-      #- gnome-shell-theme-selene
-      #- chrome-gnome-shell
-      #- gnome-shell-extension-appindicator
-      #- gnome-shell-extension-desktop-icons
-      #- gnome-shell-extension-dash-to-dock
-      #- gnome-shell-extension-freon
-      #- gnome-shell-extension-gamemode
-      #- gnome-shell-extension-gsconnect
-      #- gnome-shell-extension-media-player-indicator
-      #- gnome-shell-extension-pomodoro
-      #- gnome-shell-extension-system-monitor-applet
-      #- gnome-shell-extension-topicons-plus
+      - gnome-extensions-app
+      - gnome-shell-extension-appindicator
+      - gnome-shell-extension-desktop-icons
+      - gnome-shell-extension-dash-to-dock
+      - gnome-shell-extension-system-monitor-applet
+      - gnome-shell-extension-top-icons
+      - gnome-shell-extension-vertical-workspaces
+      - gnome-shell-extension-auto-move-windows
+      - gnome-shell-extension-panel-favorites
+      - gnome-shell-extension-pop-shell
+      - gnome-shell-extension-systemMonitor
+      - gnome-shell-extension-sound-output-device-chooser
+
       #- gnome-shell-theme-yaru
       - libwebp
       #- pdf2djvu
@@ -98,7 +114,18 @@
       - zsh
       #- ffmpegthumbnailer
       #- ffmpegthumbs
-      
+      - cockpit
+      - cockpit-bridge
+      - cockpit-composer
+      - cockpit-file-sharing
+      - cockpit-machines
+      - cockpit-navigator
+      - cockpit-pcp
+      - cockpit-podman
+      - cockpit-storaged
+      - cockpit-system
+      - cockpit-ws
+
     state: installed
 
 - name: Enable GDM
@@ -115,3 +142,15 @@
     group: root
     mode: '0644'
 
+- name: Install Nextcloud
+  flatpak:
+    name: com.nextcloud.desktopclient.nextcloud
+
+- name: Install Misc tools
+  flatpak:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - net.cozic.joplin_desktop
+    - io.appflowy.AppFlowy
+    

@@ -8,9 +8,11 @@
     - common       # List of essential packages
     - design       # Design pack
     - nodejs
+    - games
+    - communication
     - browsers
     - dev
-    #- multimedia
+    - multimedia
     - virtualization
     #- users
     #- awesome

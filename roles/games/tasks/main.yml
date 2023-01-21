@@ -1,0 +1,9 @@
+---
+- name: dolphin emu
+  shell: flatpak install org.DolphinEmu.dolphin-emu -y
+
+- name: citra emu
+  shell: flatpak install org.citra_emu.citra -y
+
+- name: yuzu emu
+  shell: flatpak install org.yuzu_emu.yuzu -y

@@ -14,10 +14,10 @@
       - libXi-devel
       - mesa-libGL-devel
       - gcc-c++
-      #- SDL2_gfx-devel
-      #- SDL2_image-devel
-      #- SDL2_mixer-devel
-      #- SDL2_ttf-devel
+        #- SDL2_gfx-devel
+        #- SDL2_image-devel
+        #- SDL2_mixer-devel
+        #- SDL2_ttf-devel
       - SDL2-devel
       #- libXxf86vm-devel
       - intltool
@@ -26,7 +26,9 @@
       - libtool
       #- fira-code-fonts
       - cargo
-      - java-1.8.0-openjdk-devel 
+      - java-1.8.0-openjdk-devel
+      - https://api.k8slens.dev/binaries/Lens-2023.1.110749-latest.x86_64.rpm
+    disable_gpg_check: yes
     state: installed
 
 - name: Add flathub
@@ -48,71 +50,75 @@
     owner: root
     state: link
 
-- name: Uninstall "phpstorm" 
+- name: Install "phpstorm" 
   flatpak:
     name: com.jetbrains.PhpStorm
-    state: absent
-
-- name: Uninstall "goland" 
-  flatpak:
-    name: com.jetbrains.Goland
-    state: absent
-
-- name: Uninstall "Pycharm-Professional"                      
-  flatpak:
-    name: com.jetbrains.Pycharm-Professional
-    state: absent
-
-- name: Uninstall "WebStorm"                      
-  flatpak:
-    name: com.jetbrains.WebStorm
-    state: absent
-
-- name: Uninstall "DBeaver"
-  flatpak:
-    name: io.dbeaver.DBeaverCommunity 
-    state: absent
-
-- name: Install "phpstorm" 
-  snap:
-    name: phpstorm
     state: present
-    classic: yes
 
 - name: Install "goland" 
-  snap:
-    name: goland
+  flatpak:
+    name: com.jetbrains.Goland
     state: present
-    classic: yes
 
 - name: Install "Pycharm-Professional"                      
-  snap:
-    name: pycharm-professional
+  flatpak:
+    name: com.jetbrains.Pycharm-Professional
     state: present
-    classic: yes
 
 - name: Install "WebStorm"                      
+  flatpak:
+    name: com.jetbrains.WebStorm
+    state: present
+
+- name: Install "DBeaver"
+  flatpak:
+    name: io.dbeaver.DBeaverCommunity 
+    state: present
+
+- name: UnInstall "phpstorm" 
+  snap:
+    name: phpstorm
+    state: absent
+    #lassic: yes
+
+- name: UnInstall "goland" 
+  snap:
+    name: goland
+    state: absent
+    #classic: yes
+
+- name: UnInstall "Pycharm-Professional"                      
+  snap:
+    name: pycharm-professional
+    state: absent
+    #classic: yes
+
+- name: UnInstall "WebStorm"                      
   snap:
     name: webstorm
-    state: present
-    classic: yes
+    state: absent
+    #classic: yes
 
 - name: Install "DBeaver"
   snap:
     name: dbeaver-ce 
-    state: present
-    classic: yes
+    state: absent
+    #classic: yes
 
 
 
-- name: Install "insomnia" 
+- name: UnInstall "insomnia" 
   snap:
     name: insomnia
-    state: present
+    state: absent
 
 - name: Install "DBeaver CE" 
   snap:
     name: dbeaver-ce        
+    state: absent
+- name: Install Notion
+  snap:
+    name: notion-snap
 
 - name: Add MS keys
   rpm_key:
@@ -133,7 +139,36 @@
 #  dnf:
 #    name: micro
 
-#- name: Install "zeal"
-#  dnf:
-#    name: zeal
+- name: Install "zeal"
+  flatpak:
+    name: org.zealdocs.Zeal
+    state: present
+
+- name: Install Eng Stuff
+  flatpak:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - org.fritzing.Fritzing
+    - org.openscad.OpenSCAD
+    - com.prusa3d.PrusaSlicer
+    - com.ultimaker.cura
+    - org.zealdocs.Zeal
+
+- name: Install micro
+  shell: curl https://getmic.ro | bash
+
+- name: Install RKE
+  get_url: 
+    url: https://github.com/rancher/rke/releases/download/v1.4.1/rke_linux-amd64
+    dest: /usr/local/bin/rke
+    mode: '0644'
+
+
+- name: Install kubectl
+  shell: curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" ;  install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+- name: Install helm
+  shell: "curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash"
+
 

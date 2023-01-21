@@ -9,11 +9,14 @@
   dnf:
     name:
       #- VirtualBox
+      - virt-manager
       - vagrant
       #- libvirt-daemon-vbox
       #- docker-vim
       #- docker-selinux
       #- docker
+      - distrobox 
+      - podman-docker
       - podman-compose
       - podman
       - binutils

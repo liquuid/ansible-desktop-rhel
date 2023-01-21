@@ -26,3 +26,22 @@
       #- dolphin-emu
       #- strawberry
     state: latest
+
+- name: Install Flatpaks
+  flatpak:
+    name: "{{ item }}"
+    state: present
+  loop:
+      - org.audacityteam.Audacity
+      - io.lmms.LMMS
+      - clementine
+      - strawberry
+      - org.pitivi.Pitivi
+      - kdenlive
+      - org.blender.Blender
+      - org.gnome.NautilusPreviewer
+      - tv.plex.PlexDesktop 
+      - com.github.iwalton3.jellyfin-media-player
+
+      
+         

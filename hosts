@@ -4,3 +4,4 @@ localhost           ansible_connection=local
 
 [rocky9]
 192.168.0.25
+192.168.0.196
