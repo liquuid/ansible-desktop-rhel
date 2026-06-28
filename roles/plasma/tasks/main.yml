@@ -46,6 +46,8 @@
       - ffmpegthumbnailer
       - ffmpegthumbs
       - francis
+      - okular
+      - gwenview
       - plasmatube
       - plasma-oxygen-qt6
       - plasma-login-manager
