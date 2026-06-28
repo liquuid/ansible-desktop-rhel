@@ -45,11 +45,20 @@
     name: '@Workstation'
     state: present
 
+- name: ZFS release
+  dnf: name=https://zfsonlinux.org/epel/zfs-release-2-2.el9.noarch.rpm disable_gpg_check=yes
 
+- name: ZFS DKMS
+  dnf:
+    name: '{{ item }}'
+  loop:
+    - kernel-devel
+    - zfs
 
 - name: Package | Install lists packages
   dnf:
     name:
+  
       - zsh
       #- geary
       - bash-completion
