@@ -1,0 +1,30 @@
+---
+- hosts: all
+  vars_files:
+    - group_vars/all.yml
+
+  become: true
+  pre_tasks:
+    - name: pre-run | update package cache ( RHEL )
+      tags: always
+      dnf: update_cache=yes
+      changed_when: False
+      when: ansible_distribution in ["Rockylinux", "Almalinux"]
+
+- hosts: all
+  tags: common
+  become: true
+  roles:
+    - common
+
+#- hosts: workstation
+#  tags: workstation
+#  become: true
+#  roles:
+#    - workstation
+#
+#- hosts: server
+#  tags: server
+#  become: true
+#  roles:
+#    - server

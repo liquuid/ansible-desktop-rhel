@@ -1,165 +1,81 @@
 ---
+
 - name: Setup SSHD
   service: name=sshd state=started enabled=yes
 
-#- name: Setup dependencies
-#  dnf:
-#    name:
-#      - python3-dnf
 - name: Enable CRB
   shell: dnf config-manager --set-enabled crb
   when: ansible_distribution == "Rockylinux"
 
 - name: Enable CRB RHEL
-  shell: subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
+  shell: subscription-manager repos --enable codeready-builder-for-rhel-10-x86_64-rpms
   when: ansible_distribution == "Red Hat Enterprise Linux"  
 
 - name: Install REMI
-  dnf: name=http://mirror.digitalnova.at/remi/enterprise/remi-release-9.rpm state=latest disable_gpg_check=yes
+  dnf: name=http://mirror.digitalnova.at/remi/enterprise/remi-release-10.rpm state=latest disable_gpg_check=yes
 
 - name: Install ELREPO
-  dnf: name=https://www.elrepo.org/elrepo-release-9.el9.elrepo.noarch.rpm state=latest disable_gpg_check=yes
-
-- name: Install Ghettoforge
-  dnf: name=https://mirror.ghettoforge.org/distributions/gf/gf-release-latest.gf.el9.noarch.rpm state=latest disable_gpg_check=yes
+  dnf: name=https://www.elrepo.org/elrepo-release-10.el10.elrepo.noarch.rpm state=latest disable_gpg_check=yes
 
 - name: Install EPEL
-  dnf: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm state=latest disable_gpg_check=yes
+  dnf: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm state=latest disable_gpg_check=yes
 
 - name: Install RPMfusion free
-  dnf: name=https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm state=latest disable_gpg_check=yes
+  dnf: name=https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-10.noarch.rpm state=latest disable_gpg_check=yes
 
 - name: Install RPMfusion nonfree
-  dnf: name=https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm state=latest disable_gpg_check=yes
-
-#- name: Team Viewer
-#  dnf: name=https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm disable_gpg_check=yes
-
-- name: Install Gnome
-  dnf:
-    name: '@GNOME Desktop Environment'
-    state: present
-
-- name: Install Workstation
-  dnf:
-    name: '@Workstation'
-    state: present
-
-- name: ZFS release
-  dnf: name=https://zfsonlinux.org/epel/zfs-release-2-2.el9.noarch.rpm disable_gpg_check=yes
-
-- name: ZFS DKMS
-  dnf:
-    name: '{{ item }}'
-  loop:
-    - kernel-devel
-    - zfs
+  dnf: name=https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-10.noarch.rpm state=latest disable_gpg_check=yes
 
 - name: Package | Install lists packages
   dnf:
+    update_cache: yes
     name:
   
       - zsh
-      #- geary
       - bash-completion
       - openssh-server
       - vim
       - git
       - NetworkManager-tui
-      - unar
+      #- unar
       - htop
       - tree
       - dstat
       - screen
       - curl
       - wget
-      - ccze
+      #- ccze
       - tmux
-      - terminator
       - tig
       - unzip
-      - neofetch
+      - fastfetch
       - iotop
       - pciutils
       - usbutils
       - nmap
-      - youtube-dl
+      #- youtube-dl
       - squashfs-tools
       #- shntool
       - unrar
       - p7zip
       - mc
-      - nnn
-      - syncthing
+      #- nnn
       - sshfs
-      - gnome-tweak-tool
       - util-linux-user
-      - qt5ct
-      #- yaru-theme
-      - gnome-extensions-app
-      - gnome-shell-extension-appindicator
-      - gnome-shell-extension-desktop-icons
-      - gnome-shell-extension-dash-to-dock
-      - gnome-shell-extension-system-monitor-applet
-      - gnome-shell-extension-top-icons
-      - gnome-shell-extension-vertical-workspaces
-      - gnome-shell-extension-auto-move-windows
-      - gnome-shell-extension-panel-favorites
-      - gnome-shell-extension-pop-shell
-      - gnome-shell-extension-systemMonitor
-      - gnome-shell-extension-sound-output-device-chooser
-
-      #- gnome-shell-theme-yaru
       - libwebp
-      #- pdf2djvu
       - poppler-utils
       - ImageMagick
       - xclip
-      - libreoffice-langpack-pt-BR
       #- compsize
-      #- foliate
-      - yakuake
-      - fortune-mod
-      - zsh
-      #- ffmpegthumbnailer
-      #- ffmpegthumbs
+      #- fortune-mod
       - cockpit
       - cockpit-bridge
       - cockpit-composer
-      - cockpit-file-sharing
+      - cockpit-files
       - cockpit-machines
-      - cockpit-navigator
-      - cockpit-pcp
       - cockpit-podman
       - cockpit-storaged
       - cockpit-system
       - cockpit-ws
 
     state: installed
-
-- name: Enable GDM
-  service:
-    name: gdm
-    enabled: yes
-    state: started
-
-- name: Install webp thumbnailer
-  template:
-    src: webp.thumbnailer
-    dest: /usr/share/thumbnailers/
-    owner: root
-    group: root
-    mode: '0644'
-
-- name: Install Nextcloud
-  flatpak:
-    name: com.nextcloud.desktopclient.nextcloud
-
-- name: Install Misc tools
-  flatpak:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - net.cozic.joplin_desktop
-    - io.appflowy.AppFlowy
-    

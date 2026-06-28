@@ -1,0 +1,4 @@
+dnf up -y
+dnf install ansible-core -y
+ansible-galaxy collection install community.general
+#ansible-playbook -i hosts workstation.yml
