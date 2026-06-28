@@ -14,9 +14,11 @@
   roles:
     - common
     - workstation
+    - plasma
     - design
     - communication
     - browsers
     - dev
     - multimedia
     - virtualization
+    - users

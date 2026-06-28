@@ -1,0 +1,102 @@
+---
+- name: Install Plasma Desktop
+  dnf:
+    name: '@KDE Plasma Workspaces'
+    state: present
+
+- name: Install Workstation
+  dnf:
+    name: '@Workstation'
+    state: present
+
+- name: Set default boot target to graphical mode
+  shell: systemctl set-default graphical.target
+    
+- name: Package | Install lists packages
+  dnf:
+    name:
+  
+      - bash-completion
+      - vim
+      - git
+      - htop
+      - tree
+      - dstat
+      - screen
+      - curl
+      - wget
+      - tmux
+      - yakuake
+      - tig
+      - unzip
+      - squashfs-tools
+      - unrar
+      - p7zip
+      - mc
+      - sshfs
+      - kate
+      - util-linux-user
+      - qt5ct
+      - libwebp
+      - poppler-utils
+      - ImageMagick
+      - xclip
+      - yakuake
+      - zsh
+      - ffmpegthumbnailer
+      - ffmpegthumbs
+      - francis
+      - plasmatube
+      - plasma-oxygen-qt6
+      - plasma-login-manager
+      - plasma-breeze-qt6
+      - sddm-wayland-plasma
+      - plasma-oxygen
+      - plasma-discover
+      - plasma-discover-flatpak
+      - plasma-discover-packagekit
+      - plasma-disks
+      - plasma-browser-integration
+      - kdeplasma-addons
+      - kde-settings-plasma
+      - kde-settings-plasmalogin
+      - skanlite
+      - kalk
+      - sddm-breeze
+      - kde-settings-sddm
+      - sddm-kcm
+      - sddm-themes
+      
+
+
+    state: installed
+
+- name: Enable GDM
+  service:
+    name: gdm
+    enabled: yes
+    state: started
+
+- name: Install webp thumbnailer
+  template:
+    src: webp.thumbnailer
+    dest: /usr/share/thumbnailers/
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Add flathub repo
+  shell: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: Install Nextcloud
+  community.general.flatpak:
+    name: com.nextcloud.desktopclient.nextcloud
+
+- name: Install Misc tools
+  community.general.flatpak:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - net.cozic.joplin_desktop
+    - io.appflowy.AppFlowy
+    
