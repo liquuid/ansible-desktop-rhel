@@ -36,6 +36,7 @@
       - openssh-server
       - vim
       - git
+      - tig
       - NetworkManager-tui
       #- unar
       - htop
