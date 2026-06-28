@@ -99,4 +99,5 @@
   loop:
     - net.cozic.joplin_desktop
     - io.appflowy.AppFlowy
+    - com.github.tchx84.Flatseal
     
