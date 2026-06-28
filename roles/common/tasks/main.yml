@@ -5,7 +5,7 @@
 
 - name: Enable CRB
   shell: dnf config-manager --set-enabled crb
-  when: ansible_distribution == "Rockylinux"
+  when: ansible_distribution == "Rocky"
 
 - name: Enable CRB RHEL
   shell: subscription-manager repos --enable codeready-builder-for-rhel-10-x86_64-rpms
@@ -80,3 +80,9 @@
       - cockpit-ws
 
     state: installed
+
+- name: Enable cockpit web console
+  service:
+    name: cockpit.socket
+    state: started
+    enabled: true

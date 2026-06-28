@@ -6,13 +6,13 @@
       - mpv
       - webp-pixbuf-loader
       - libwebp
-      - gthumb
+      #- gthumb
       #- lmms
       - ffmpeg
       - x264
       - x265
       #- audacity
-      - transmission
+      - qbittorrent
       #- clementine
       #- pitivi
       #- gstreamer1-plugin-openh264
@@ -24,7 +24,7 @@
       #- PackageKit-gstreamer-plugin
       #- steam
       #- dolphin-emu
-      #- strawberry
+      - strawberry
     state: latest
 
 - name: Install Flatpaks
@@ -34,8 +34,6 @@
   loop:
       - org.audacityteam.Audacity
       - io.lmms.LMMS
-      - clementine
-      - strawberry
       - org.pitivi.Pitivi
       - kdenlive
       - org.blender.Blender

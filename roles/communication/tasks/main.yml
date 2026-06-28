@@ -1,11 +1,13 @@
 ---
-#- name: uninstall Teams
-#  shell: flatpak remove com.microsoft.Teams -y
+- name: uninstall Teams
+  flatpak:
+    name: com.microsoft.Teams
+    state: absent
 
-- name: Install Anydesk
+- name: uninstall Anydesk
   flatpak:
     name: com.anydesk.Anydesk
-    state: present
+    state: absent
 
 - name: Install Geary
   flatpak:
@@ -14,18 +16,12 @@
 
 
 - name: Install Slack
-  community.general.snap:
-    name: slack
-    classic: yes
-
-- name: Install Discord Snap
-  community.general.snap:
-    name: discord
-    classic: yes
+  flatpak:
+    name: com.slack.Slack
     state: present
 
-#- name: Install Discord
-#  apt:
-#    deb: https://dl.discordapp.net/apps/linux/0.0.22/discord-0.0.22.deb
-#    state: present
+- name: Install Discord Snap
+  flatpak:
+    name: com.discordapp.Discord
+    state: present
 

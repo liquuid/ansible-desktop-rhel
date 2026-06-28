@@ -19,3 +19,9 @@
   dnf:
     name: brave-browser
     state: latest
+
+- name: Install Zen Browser
+  flatpak:
+    name: app.zen_browser.zen
+    state: present
+

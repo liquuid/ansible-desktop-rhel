@@ -7,21 +7,16 @@
       tags: always
       dnf: update_cache=yes
       changed_when: False
-      when: ansible_distribution in ["Rockylinux", "Almalinux"]
+      when: ansible_distribution in ["Rocky", "Almalinux"]
 
 - hosts: localhost
   become: true
   roles:
     - common
-
-#- hosts: workstation
-#  tags: workstation
-#  become: true
-#  roles:
-#    - workstation
-#
-#- hosts: server
-#  tags: server
-#  become: true
-#  roles:
-#    - server
+    - workstation
+    - design
+    - communication
+    - browsers
+    - dev
+    - multimedia
+    - virtualization
