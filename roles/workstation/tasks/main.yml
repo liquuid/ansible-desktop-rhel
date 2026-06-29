@@ -1,8 +1,8 @@
 ---
-- name: Install Gnome
-  dnf:
-    name: '@GNOME Desktop Environment'
-    state: present
+#- name: Install Gnome
+#  dnf:
+#    name: '@GNOME Desktop Environment'
+#    state: present
 
 - name: Install Workstation
   dnf:
