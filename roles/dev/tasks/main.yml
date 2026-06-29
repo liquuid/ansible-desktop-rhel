@@ -4,7 +4,7 @@
     name: '@Development tools'
     state: present
     
-- name: Install X11 libs
+- name: Remove some packages 
   dnf:
     name:
       - libX11-devel
@@ -13,20 +13,34 @@
       - libXinerama-devel
       - libXi-devel
       - mesa-libGL-devel
-      - gcc-c++
-        #- SDL2_gfx-devel
-        #- SDL2_image-devel
-        #- SDL2_mixer-devel
-        #- SDL2_ttf-devel
+      - SDL2_gfx-devel
+      - SDL2_image-devel
+      - SDL2_mixer-devel
+      - SDL2_ttf-devel
       - SDL2-devel
-      #- libXxf86vm-devel
-      - intltool
-      #- glib-devel
+      - SDL3-devel
+      - libXxf86vm-devel
+      - glib-devel
       - glib2-devel
+
+    disable_gpg_check: no
+    state: installed
+    
+- name: Install X11 libs
+  dnf:
+    name:
+
+      - gcc-c++
+      - intltool
       - libtool
-      #- fira-code-fonts
+      - fira-code-fonts
       - cargo
-    disable_gpg_check: yes
+      - nix
+      - uv
+      - conda
+      - python-unversioned-command
+      
+    disable_gpg_check: no
     state: installed
 
 
