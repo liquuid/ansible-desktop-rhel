@@ -11,9 +11,6 @@
   shell: subscription-manager repos --enable codeready-builder-for-rhel-10-x86_64-rpms
   when: ansible_distribution == "Red Hat Enterprise Linux"  
 
-- name: Install REMI
-  dnf: name=http://mirror.digitalnova.at/remi/enterprise/remi-release-10.rpm state=latest disable_gpg_check=yes
-
 - name: Install ELREPO
   dnf: name=https://www.elrepo.org/elrepo-release-10.el10.elrepo.noarch.rpm state=latest disable_gpg_check=yes
 
