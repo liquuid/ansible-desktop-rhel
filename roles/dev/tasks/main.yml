@@ -24,7 +24,7 @@
       - glib2-devel
 
     disable_gpg_check: no
-    state: installed
+    state: absent
     
 - name: Install X11 libs
   dnf:
