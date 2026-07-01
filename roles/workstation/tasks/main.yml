@@ -14,6 +14,7 @@
     
 - name: Package | Install lists packages
   dnf:
+    allowerasing: yes
     name:
   
       - bash-completion
@@ -64,11 +65,11 @@
 
     state: installed
 
-- name: Enable GDM
-  service:
-    name: gdm
-    enabled: yes
-    state: started
+#- name: Enable GDM
+#  service:
+#    name: gdm
+#    enabled: yes
+#    state: started
 
 - name: Install webp thumbnailer
   template:
