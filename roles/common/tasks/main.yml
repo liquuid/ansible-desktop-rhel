@@ -1,4 +1,7 @@
 ---
+- name: Debug
+  debug:
+    var: ansible_distribution
 
 - name: Setup SSHD
   service: name=sshd state=started enabled=yes

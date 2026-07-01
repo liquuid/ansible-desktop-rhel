@@ -6,6 +6,7 @@
 
 - name: Install Workstation
   dnf:
+    allowerasing: true
     name: '@Workstation'
     state: present
 
@@ -14,7 +15,6 @@
     
 - name: Package | Install lists packages
   dnf:
-    allowerasing: true
     name:
   
       - bash-completion
