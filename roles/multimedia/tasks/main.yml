@@ -2,6 +2,7 @@
 
 - name: Package | Install lists packages
   dnf:
+    allowerasing: true
     name:
       - mpv
       - webp-pixbuf-loader
